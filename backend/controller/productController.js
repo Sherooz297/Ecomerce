@@ -2,6 +2,7 @@ const Product = require('../Models/productModal')
 const ErrorHandling = require('../utils/ErrorHandler')
 const ErrorHandler = require('../utils/ErrorHandler')
 const catchAsyncError = require('../middleware/catchAsyncError')
+const ApiFeatures = require("../utils/apifeatures")
 
 //Creating the New product ---Admin Only--- 
 
@@ -16,7 +17,8 @@ exports.createproduct = catchAsyncError(async(req,res,next)=>{
 //   Getting   all  product  
 
 exports.getallproduct= catchAsyncError(async(req,res,next)=>{
-   const product = await Product.find()
+  const apifeatures = new ApiFeatures(Product.find(),req.query).search()
+   const product = await apifeatures.query;
    if(!product){
         return next(new ErrorHandler("Product Not found",404))
    }
