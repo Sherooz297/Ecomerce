@@ -36,6 +36,15 @@ class ApiFeatures {
         return this
 
     }
+
+    //pagination the product we will display the 5 product at a time
+
+    pagination(resultperPage){
+        const currentpage =Number(this.querystr.page) || 1;
+        const skip = resultperPage*(currentpage-1)
+        this.query = this.query.limit(resultperPage).skip(skip);
+        return this;
+    }
 }
 
 module.exports = ApiFeatures
