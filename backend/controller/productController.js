@@ -1,6 +1,5 @@
 const Product = require('../Models/productModal')
 const ErrorHandling = require('../utils/ErrorHandler')
-const ErrorHandler = require('../utils/ErrorHandler')
 const catchAsyncError = require('../middleware/catchAsyncError')
 const ApiFeatures = require("../utils/apifeatures")
 
@@ -19,15 +18,17 @@ exports.createproduct = catchAsyncError(async(req,res,next)=>{
 exports.getallproduct= catchAsyncError(async(req,res,next)=>{
 
   const resultperPage = 5;
+  const productCount = await Product.countDocuments()
 
   const apifeatures = new ApiFeatures(Product.find(),req.query).search().filter().pagination(resultperPage)
    const product = await apifeatures.query;
    if(!product){
-        return next(new ErrorHandler("Product Not found",404))
+        return next(new ErrorHandling("Product Not found",404))
    }
    res.status(201).json({
     success:true,
-    product
+    product,
+    productCount
    })
 });
 
