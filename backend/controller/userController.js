@@ -1,6 +1,7 @@
 const User =  require('../Models/userModal')
 const ErrorHandling = require('../utils/ErrorHandler')
-const catchAsyncError = require('../middleware/catchAsyncError')
+const catchAsyncError = require('../middleware/catchAsyncError');
+const sendToken = require('../utils/jwttoken,');
 
 //user regeistration
 
@@ -14,13 +15,11 @@ exports.registeruser = catchAsyncError(async(req,res,next)=>{
         }
     })
 
-      const token = user.getjwttoken()
-
-    res.status(201).json({
-        success:true,
-        token,
-    })
+  sendToken(user,201,res)
 })
+
+
+//Creating the login route
 
 
 exports.loginUser = catchAsyncError(async(req,res,next)=>{
@@ -43,10 +42,5 @@ exports.loginUser = catchAsyncError(async(req,res,next)=>{
         return next(new ErrorHandling("Invalid email or password",401))
     }
 
-    const token = user.getjwttoken();
-
-    res.status(200).json({
-        success:true,
-        token,
-    })
+    sendToken(user,200,res)
 })
