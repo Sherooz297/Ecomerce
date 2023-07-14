@@ -4,10 +4,10 @@ const {getallproduct, createproduct, updateproduct, deleteproduct, getsingleprod
 const { isAuthenticationUser, autherizedRole } = require('../middleware/auth')
 const router = express.Router()
 
-router.route("/product").get( isAuthenticationUser, autherizedRole("admin"), getallproduct)
-router.route("/createproduct").post(isAuthenticationUser,createproduct)
-router.route("/updateproduct/:id").put(isAuthenticationUser,updateproduct)
-router.route("/deleteproduct/:id").delete(isAuthenticationUser,deleteproduct)
+router.route("/product").get(getallproduct)
+router.route("/createproduct").post(isAuthenticationUser, autherizedRole("admin"),createproduct)
+router.route("/updateproduct/:id").put(isAuthenticationUser, autherizedRole("admin"),updateproduct)
+router.route("/deleteproduct/:id").delete(isAuthenticationUser, autherizedRole("admin"),deleteproduct)
 router.route("/getsingleproduct/:id").get(getsingleproduct)
 
 
