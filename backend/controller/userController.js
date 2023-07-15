@@ -27,7 +27,7 @@ exports.loginUser = catchAsyncError(async(req,res,next)=>{
     const {email,password} = req.body
 
     //checking if user enter email and password
-    
+
     if(!email || !password){
         return next(new ErrorHandling("Please Enter Email and Password",400))
     }
@@ -54,7 +54,7 @@ exports.logout = catchAsyncError(async(req,res,next)=>{
 
     res.cookie("token",null,{
         expires: new Date(Date.now()),
-        httpOnly:true
+        httpOnly:true,
     })
 
     res.status(200).json({
@@ -155,7 +155,7 @@ exports.getUserDetail = catchAsyncError(async(req,res,next)=>{
 //update user password
 
 exports.updatePassword = catchAsyncError(async(req,res,next)=>{
-    const user = await User.findById(req.user.id).select("+password")
+    let user = await User.findById(req.user.id).select("+password")
 
     const isPasswordMatch = await user.comparePassword(req.body.oldPassword)
     if(!isPasswordMatch){
@@ -174,4 +174,49 @@ exports.updatePassword = catchAsyncError(async(req,res,next)=>{
         message:"password change successfully"
     })
 
+})
+
+//update user profile
+
+exports.updateProfile = catchAsyncError(async(req,res,next)=>{
+    const newUserData = {
+        name:req.body.name,
+        email:req.body.email,
+    }
+
+    //ew will add cloudnary later
+
+
+    const user = await User.findByIdAndUpdate(req.user.id,newUserData)
+
+    res.status(200).json({
+        success:true
+    })
+})
+
+
+
+//get all user  (admin only)
+
+exports.getAllUser = catchAsyncError(async(req,res,next)=>{
+    const users = await User.find();
+    res.status(200).json({
+        success:true,
+        users
+    })
+})
+
+
+//get single user  (admin only)
+
+exports.getSingleUser = catchAsyncError(async(req,res,next)=>{
+    const user = await User.findById(req.params.id);
+
+    if(!user){
+        return next(new ErrorHandling("User does not exixt with this is",400))
+    }
+    res.status(200).json({
+        success:true,
+        user
+    })
 })
