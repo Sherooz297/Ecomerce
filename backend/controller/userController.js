@@ -27,6 +27,7 @@ exports.loginUser = catchAsyncError(async(req,res,next)=>{
     const {email,password} = req.body
 
     //checking if user enter email and password
+    
     if(!email || !password){
         return next(new ErrorHandling("Please Enter Email and Password",400))
     }
@@ -132,4 +133,45 @@ exports.resetPassword = catchAsyncError(async(req,res,next)=>{
     await user.save()
 
     sendToken(user,200,res)
+})
+
+
+
+
+//  <<--------------Creating User Routes------------------------>>
+
+
+
+// get user detail 
+
+exports.getUserDetail = catchAsyncError(async(req,res,next)=>{
+    const user = await User.findById(req.user.id);
+    res.status(200).json({
+        success:true,
+        user,
+    })   
+})
+
+//update user password
+
+exports.updatePassword = catchAsyncError(async(req,res,next)=>{
+    const user = await User.findById(req.user.id).select("+password")
+
+    const isPasswordMatch = await user.comparePassword(req.body.oldPassword)
+    if(!isPasswordMatch){
+        return next(new ErrorHandling("old password is incorrect",400))
+    }
+
+    if(req.body.newPassword !== req.body.confirmPassword){
+        return next(new ErrorHandling("password does not matched",400))
+    }
+
+    user.password = req.body.newPassword;
+    await user.save()
+
+    res.status(200).json({
+        success : true,
+        message:"password change successfully"
+    })
+
 })
