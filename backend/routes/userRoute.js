@@ -16,6 +16,7 @@ router.route("/logout").get(logout)
 
 router.route("/me").get(isAuthenticationUser, getUserDetail)
 router.route("/me/update").put(isAuthenticationUser, updateProfile)
+router.route("/password/update").put(isAuthenticationUser,updatePassword)
 router.route("/admin/user").get(isAuthenticationUser,autherizedRole('admin'),getAllUser)
 router.route('/admin/user/:id').get(isAuthenticationUser,autherizedRole('admin'),getSingleUser)
 
