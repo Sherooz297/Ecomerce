@@ -39,8 +39,17 @@ const productmodal = new mongoose.Schema({
         maxLength:[4,"price can't e increase 4 digits"],
         default:0
      },
-     reviews:[
+     numberOfReviews:{
+        type:Number,
+        default:0
+    },
+      reviews:[
         {
+            user:{
+                type:mongoose.Schema.ObjectId,
+                ref:"User",
+                required:true,
+             },
             name:{
                 type:String,
                 required:true
@@ -54,6 +63,8 @@ const productmodal = new mongoose.Schema({
             }
         }
      ],
+
+
      user:{
         type:mongoose.Schema.ObjectId,
         ref:"User",
