@@ -73,20 +73,20 @@ userSchema.methods.comparePassword = async function(enterdpassword){
 
 // generating password reset token 
 
-userSchema.methods.getRestPasswordToken = function () {
-        //generating token
+userSchema.methods.getResentPassToken= function () {
+    
+    //Genetrate Token... randomBytes generate buffer values toString and hex keyword make 
+    //rendom key ("sha356") is a algoritham...
+    const resetToken = crypto.randomBytes(20).toString("hex");
+    //HASHING AND ADDING RESETpASS tOKEN TO USERSCEMA...
 
-        const restToken = crypto.randomBytes(20).toString("hex");
+    this.resetPasswordToken=crypto.createHash("sha256").update(resetToken).digest("hex")
 
-        // Hashing and adding resetpasswordtoken to user schema
+    this.resetPasswordExpire = Date.now() + 15*60*1000;     
 
-        this.resetPasswordToken = crypto.createHash("sha256").update(restToken).digest("hex")
-
-
-        this.resetPasswordExpire = Date.now() + 15*60*1000   //this wiill expire the token in 15 minuts
-
-        return restToken;
-}
+    return resetToken;
+    
+};
 
 
 

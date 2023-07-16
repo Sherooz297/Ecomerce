@@ -3,6 +3,7 @@ const ErrorHandling = require('../utils/ErrorHandler')
 const catchAsyncError = require('../middleware/catchAsyncError');
 const sendToken = require('../utils/jwttoken,');
 const sendEmail = require('../utils/sendEmail.js')
+const crypto = require("crypto")
 
 //user regeistration
 
@@ -73,11 +74,11 @@ exports.forgetPassword = catchAsyncError(async(req,res,next)=>{
 
         //get reset password token
 
-        const resetToken = user.getRestPasswordToken()
+        const resetToken = user.getResentPassToken()
 
         await user.save({validateBeforeSave:false});
 
-        const resetPassswordUrl = `${req.protocol}://${req.get("host")}/api/v1/password/rest/${resetToken}`
+        const resetPassswordUrl = `${req.protocol}://${req.get("host")}/api/v1/password/reset/${resetToken}`
 
         const message = `your password reset token is :- \n\n ${resetPassswordUrl} \n\n if you have not requested to it please ignore it`
 
@@ -109,12 +110,17 @@ exports.forgetPassword = catchAsyncError(async(req,res,next)=>{
 
 
 exports.resetPassword = catchAsyncError(async(req,res,next)=>{
+   
     //creating token hash
 
-    const restPaswordToken =crypto.createHash("sha256").update(req.params.token).digest("hex");
+    const restPasswordToken = crypto
+    .createHash('sha256')
+    .update(req.params.token)
+    .digest('hex');
+   
 
     const user = await User.findOne({
-        restPaswordToken,
+        restPasswordToken,
         resetPasswordExpire:{
             $gt:Date.now()
         }
@@ -130,6 +136,7 @@ exports.resetPassword = catchAsyncError(async(req,res,next)=>{
     user.password = req.body.password;
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;
+
     await user.save()
 
     sendToken(user,200,res)
@@ -219,4 +226,40 @@ exports.getSingleUser = catchAsyncError(async(req,res,next)=>{
         success:true,
         user
     })
+})
+
+// change the user role  --admin
+
+exports.updateRole = catchAsyncError(async(req,res,next)=>{
+    const newUserData = {
+        name:req.body.name,
+        email:req.body.email,
+        role:req.body.role
+    }
+    const user = await User.findByIdAndUpdate(req.params.id,newUserData)
+
+    res.status(200).json({
+        success:true
+    })
+})
+
+
+//delete any user ---admin---
+
+
+exports.deleteUser = catchAsyncError(async(req,res,next)=>{
+
+    const user = await User.findByIdAndRemove(req.params.id)
+
+    if(!user){
+        return next(new ErrorHandling("User does not exixt with this is",400))
+    }
+
+ 
+
+    res.status(200).json({
+        success:true,
+        message:"user have been deleted"
+    })
+
 })
