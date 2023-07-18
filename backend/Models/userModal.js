@@ -71,8 +71,7 @@ userSchema.methods.comparePassword = async function(enterdpassword){
         return await bcrypt.compare(enterdpassword,this.password)
 }
 
-// generating password reset token 
-
+//Generating Password Reset Token... 
 userSchema.methods.getResentPassToken= function () {
     
     //Genetrate Token... randomBytes generate buffer values toString and hex keyword make 

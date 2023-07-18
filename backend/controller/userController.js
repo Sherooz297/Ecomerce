@@ -113,17 +113,13 @@ exports.resetPassword = catchAsyncError(async(req,res,next)=>{
    
     //creating token hash
 
-    const restPasswordToken = crypto
+    const resetPasswordToken = crypto
     .createHash('sha256')
     .update(req.params.token)
     .digest('hex');
 
-    console.log(restPasswordToken)
-    
-   
-
     const user = await User.findOne({
-        restPasswordToken,
+        resetPasswordToken,
         resetPasswordExpire:{
             $gt:Date.now()
         }
