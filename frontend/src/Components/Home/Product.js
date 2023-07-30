@@ -5,7 +5,7 @@ import ReactStar from "react-rating-stars-component"
 
 const Product = ({product}) => {
     const options = {
-        value: product.ratings,
+        value: product.rating,
         readOnly: true,
         precision: 0.5,
       };
@@ -14,9 +14,9 @@ const Product = ({product}) => {
     <img src={product.images[0].url} alt="product" />
     <p>{product.name}</p>
     <div>
-    <ReactStar {...options}/><span>(256 Rieviews)</span>
+    <ReactStar {...options}/><span>{`${product.numberOfReviews} Rieviews`}</span>
     </div>
-    <span>{product.price}</span>
+    <span>{`₨ ${product.price}`}</span>
     
 
     </Link>

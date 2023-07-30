@@ -1,6 +1,6 @@
 .banner{
-    background-image: linear-gradient(to right, #635dc0 ,#3027ea);
-    height: 89vmin;
+    background-image: linear-gradient(to right, #635dc0 ,#433445);;
+    height: 91vmin;
     text-align: center;
     display: flex;
     flex-direction: column;

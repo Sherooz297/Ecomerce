@@ -1,35 +1,31 @@
-
-import { useEffect } from 'react';
-import './App.css';
-import Navbar from "./Components/layout/Navbar/Navbar"
-import {BrowserRouter,Routes,Route} from 'react-router-dom'
-import webFont from "webfontloader"
-import Footer from './Components/layout/Footer/Footer';
-import Home from './Components/Home/Home'
+import { useEffect } from "react";
+import "./App.css";
+import Navbar from "./Components/layout/Navbar/Navbar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import webFont from "webfontloader";
+import Footer from "./Components/layout/Footer/Footer";
+import Home from "./Components/Home/Home";
 
 function App() {
-   useEffect(()=>{
+  useEffect(() => {
     webFont.load({
-        google:{
-          families : ["Roboto","Droid sans"]
-        }
-    })
-  },[])
+      google: {
+        families: ["Roboto", "Droid sans"],
+      },
+    });
+  }, []);
   return (
     <>
-        <BrowserRouter>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+        </Routes>
 
-         <Navbar/>
-<Routes>
-<Route path='/' element={<Home/>}></Route>
-        
-
-</Routes>
-
-         <Footer/>
-        </BrowserRouter>
-    </> 
-        )
+        <Footer />
+      </BrowserRouter>
+    </>
+  );
 }
 
 export default App;
