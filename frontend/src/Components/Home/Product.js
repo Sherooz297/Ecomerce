@@ -10,7 +10,7 @@ const Product = ({product}) => {
         precision: 0.5,
       };
   return (
-    <Link className='productCard'  id='productCard' to={product._id}>
+    <Link className='productCard'  id='productCard' to={`/getsingleproduct/${product._id}`}>
     <img src={product.images[0].url} alt="product" />
     <p>{product.name}</p>
     <div>
