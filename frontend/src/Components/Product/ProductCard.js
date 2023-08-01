@@ -92,7 +92,7 @@ const ProductCard = () => {
             </div>
         </div>
         
-        <h3 className='text-black text-4xl font-semibold text-center p-[1vmax] m-auto border-b-2  w-[20vmax] mb-[4vmax]'>REVIEWS</h3>
+        <h3 className='text-gray-700 text-4xl font-semibold text-center p-[1vmax] m-auto border-b-2  w-[20vmax] mb-[4vmax]'>REVIEWS</h3>
 
         {product.reviews && product.reviews[0] ? (
             <div className='flex overflow-auto'>

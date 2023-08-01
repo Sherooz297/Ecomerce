@@ -42,7 +42,7 @@ const Navbar = () => {
               <NavLink to="/">Home</NavLink>
             </li>
             <li>
-              <NavLink to="/about">about</NavLink>
+              <NavLink to="/ProductMenu">Products</NavLink>
             </li>
             <li>
               <NavLink to="/service">services</NavLink>
@@ -57,9 +57,9 @@ const Navbar = () => {
         <div className="social-media">
           <ul className="social-media-desktop">
             <li>
-
+            <NavLink to="/Search">
            <SearchIcon style={iconStyle}/>
-
+           </NavLink>
             </li>
             <li>
              <ProductionQuantityLimitsIcon style={iconStyle}/>
