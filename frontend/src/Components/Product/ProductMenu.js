@@ -1,17 +1,25 @@
 import React, { Fragment, useEffect,useState } from 'react';
 import { getProducts, clearErrors } from '../actions/productActions';
 import { useDispatch, useSelector } from 'react-redux';
+import "./pagination.css"
 import { useParams } from 'react-router-dom';
 import Loading from '../layout/Loader/Loading';
 import Product from '../Home/Product';
 import Pagination from './Pagination';
+import Slider from '@mui/material/Slider';
+import { Typography } from '@mui/material';
 
 
 
 const ProductMenu = () => {
   const dispatch = useDispatch();
   const [currentPage , setCurrentPage] = useState(1)
-  const { products, error, loading,resultPerPage,productCount } = useSelector((state) => state.products);
+  const [price , setPrice] = useState([0,25000])
+  
+
+  const { products, error, loading,resultperPage,productCount } = useSelector((state) => state.products);
+  console.log(productCount)
+  console.log(resultperPage)
 
   const { keyword } = useParams();
 
@@ -19,9 +27,13 @@ const ProductMenu = () => {
     setCurrentPage(e)
 }
 
+const priceHandler = (e,newPrice) =>{
+setPrice(newPrice)
+}
+
   useEffect(() => {
-    dispatch(getProducts(keyword,currentPage));
-  }, [dispatch, keyword,currentPage]); // Include "keyword" in the dependency array
+    dispatch(getProducts(keyword,currentPage,price));
+  }, [dispatch, keyword,currentPage,price]); // Include "keyword" in the dependency array
 
   return (
     <>
@@ -38,12 +50,30 @@ const ProductMenu = () => {
               products.map((product) => <Product key={product._id} product={product} />)}
           </div>
 
-         <Pagination
+          <div className='filterBox'>
+          <Typography>price</Typography>
+          <Slider
+              getAriaLabel={() => 'Temperature range'}
+              value={price}
+              onChange={priceHandler}
+              valueLabelDisplay="auto"
+              min={0}
+              max={25000}
+            />  
+          </div>
+
+          {resultperPage < productCount && (
+
+            <Pagination
              activePage={currentPage}
-             itemsCountPerPage={resultPerPage}
+             itemsCountPerPage={resultperPage}
              totalItemsCount={productCount}
              onChange={setCurrentPageNo}
          />
+
+          )}
+
+       
 
         </Fragment>
       )}

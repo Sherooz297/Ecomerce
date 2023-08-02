@@ -2,7 +2,23 @@
     display: flex;
     justify-content: center;
     margin: 6vmax;
-    
+  }
 
+
+  /* this is the style about to the range slider  */
+
+  .filterBox{
+    width: 10vmax;
+    position: absolute;
+    top: 18vmax;
+    left: 3vmax;
+  }
+
+  @media screen and (max-width:600px) {
+    .filterBox{
+      width: 20vmax;
+      position: static;
+      margin: auto;
+    }
   }
 
