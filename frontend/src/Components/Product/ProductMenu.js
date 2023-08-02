@@ -1,19 +1,27 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect,useState } from 'react';
 import { getProducts, clearErrors } from '../actions/productActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Loading from '../layout/Loader/Loading';
 import Product from '../Home/Product';
+import Pagination from './Pagination';
+
+
 
 const ProductMenu = () => {
   const dispatch = useDispatch();
-  const { products, error, loading } = useSelector((state) => state.products);
+  const [currentPage , setCurrentPage] = useState(1)
+  const { products, error, loading,resultPerPage,productCount } = useSelector((state) => state.products);
 
   const { keyword } = useParams();
 
+  const setCurrentPageNo = (e) => {
+    setCurrentPage(e)
+}
+
   useEffect(() => {
-    dispatch(getProducts(keyword));
-  }, [dispatch, keyword]); // Include "keyword" in the dependency array
+    dispatch(getProducts(keyword,currentPage));
+  }, [dispatch, keyword,currentPage]); // Include "keyword" in the dependency array
 
   return (
     <>
@@ -29,6 +37,14 @@ const ProductMenu = () => {
             {products &&
               products.map((product) => <Product key={product._id} product={product} />)}
           </div>
+
+         <Pagination
+             activePage={currentPage}
+             itemsCountPerPage={resultPerPage}
+             totalItemsCount={productCount}
+             onChange={setCurrentPageNo}
+         />
+
         </Fragment>
       )}
     </>

@@ -31,7 +31,8 @@ exports.getallproduct= catchAsyncError(async(req,res,next)=>{
    res.status(201).json({
     success:true,
     product,
-    productCount
+    productCount,
+    resultperPage
    })
 });
 

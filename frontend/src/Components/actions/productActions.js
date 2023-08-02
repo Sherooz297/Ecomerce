@@ -11,11 +11,11 @@ import {
 
 // Modify the action creator to use Redux Thunk correctly
 
-export const getProducts = (keyword="") => async (dispatch) => {      //function name should be camel case to implement thunk
+export const getProducts = (keyword="",currentPage=1) => async (dispatch) => {      //function name should be camel case to implement thunk
   try {
     dispatch({ type: ALL_PRODUCT_REQUEST });
 
-    let link = `http://localhost:4000/api/v1/product?keyword=${keyword}`
+    let link = `http://localhost:4000/api/v1/product?keyword=${keyword}&page=${currentPage}`
 
     const { data } = await axios.get(link);
     console.log(data)
