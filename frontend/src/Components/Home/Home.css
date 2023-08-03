@@ -65,6 +65,7 @@
     flex-wrap: wrap;
     justify-content: center;
     max-width: 100%;
+    min-height: 30vmin;
   }
   
   .productCard {
@@ -76,6 +77,7 @@
     margin: 2vmax;
     transition: all 0.5s;
     padding-bottom: 0.5vmax;
+   
   }
 
   .productCard > img {

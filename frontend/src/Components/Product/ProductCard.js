@@ -6,6 +6,7 @@ import ReviewCard from "./ReviewCard.js"
 import ReactStar from "react-rating-stars-component"
 import Loading from '../layout/Loader/Loading';
 import { useAlert } from 'react-alert';
+import MetaData from '../layout/MetaData';
 
 const ProductCard = () => {
 
@@ -45,6 +46,8 @@ const ProductCard = () => {
     return (
      <>
             {loading ? <Loading/> : <Fragment>
+
+            <MetaData title={`${product.name} -- ECOMMERCE`} />
 
             <div className='flex flex-col justify-between lg:flex-row gap-16 lg:items-center'>
             <div className='flex flex-col gap-6 lg:w-2/4'>

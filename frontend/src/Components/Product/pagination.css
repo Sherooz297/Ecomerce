@@ -14,6 +14,27 @@
     left: 3vmax;
   }
 
+
+  /* this is the style about to category box  */
+
+  .categoryBox{
+    padding: 0%;
+
+  }
+
+  .category-link{
+    list-style: none;
+    color: rgba(20, 20, 20, 0.836);
+    cursor: pointer;
+    font: 400 ,0.8vmax "Roboto";
+    margin: 0.4vmax;
+    transition: all 0.5s;
+  }
+  .category-link:hover{
+    color: blue;
+  }
+
+
   @media screen and (max-width:600px) {
     .filterBox{
       width: 20vmax;

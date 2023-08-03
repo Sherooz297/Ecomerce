@@ -11,11 +11,15 @@ import {
 
 // Modify the action creator to use Redux Thunk correctly
 
-export const getProducts = (keyword="",currentPage=1,price=[0 , 25000]) => async (dispatch) => {      //function name should be camel case to implement thunk
+export const getProducts = (keyword="",currentPage=1,price=[0 , 25000],catogory,ratings=0) => async (dispatch) => {      //function name should be camel case to implement thunk
   try {
     dispatch({ type: ALL_PRODUCT_REQUEST });
 
-    let link = `http://localhost:4000/api/v1/product?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}`
+    let link = `http://localhost:4000/api/v1/product?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&rating[gte]=${ratings}`
+
+    if(catogory){
+     link = `http://localhost:4000/api/v1/product?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${catogory}&rating[gte]=${ratings}`
+    }
 
     const { data } = await axios.get(link);
     console.log(data)
