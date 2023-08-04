@@ -18,10 +18,10 @@ const Search = () => {
   return (
     <>
       <MetaData title="Search a product -- ECOMMERCE" />
-      <form className='w-[100vw] h-[100vh] max-w-full flex justify-center items-center bg-slate-300 fixed top-0 left-0-0' onSubmit={searchSubmitHandler}>
+      <form className='w-[100vw] h-[100vh] max-w-full flex justify-center items-center bg-slate-100 fixed top-0 left-0-0' onSubmit={searchSubmitHandler}>
         <input
           type="text"
-          className='shadow-sm bg-white border-none text-black text-2xl p-[1vmax,2vmax] w-[50%] outline-none rounded-sm font-thin text-1.1vmax font-cursive my-element h-[8%]'
+          className='shadow-sm bg-white border-none  p-[1vmax,2vmax] w-[50%] outline-none rounded-sm font-thin text-[1.1vmax] font-cursive my-element h-[8%]'
           placeholder='Search a product ...'
           onChange={(e) => setKeyword(e.target.value)}
         />

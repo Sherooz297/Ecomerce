@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect,useState } from 'react';
-import { getProducts, clearErrors } from '../actions/productActions';
+import { getProducts, clearErrors } from '../../actions/productActions';
 import { useDispatch, useSelector } from 'react-redux';
 import "./pagination.css"
 import { useParams } from 'react-router-dom';

@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
-import { clearErrors, getProductDetails } from '../actions/productActions'
+import { clearErrors, getProductDetails } from '../../actions/productActions'
 import ReviewCard from "./ReviewCard.js"
 import ReactStar from "react-rating-stars-component"
 import Loading from '../layout/Loader/Loading';

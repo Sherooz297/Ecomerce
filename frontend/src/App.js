@@ -8,6 +8,7 @@ import Home from "./Components/Home/Home";
 import ProductCard from "./Components/Product/ProductCard.js";
 import ProductMenu from "./Components/Product/ProductMenu.js"
 import Search from "./Components/Product/Search.js"
+import LoginSignup from "./Components/User/LoginSignup";
 
 function App() {
   useEffect(() => {
@@ -26,8 +27,8 @@ function App() {
           <Route path="/getsingleproduct/:id" element={<ProductCard/>}></Route>
           <Route path="/ProductMenu" element={<ProductMenu/>}></Route>
           <Route path="/ProductMenu/:keyword" element={<ProductMenu/>}></Route>
-
           <Route path="/Search" element={<Search/>}></Route>
+          <Route path="/login" element={<LoginSignup/>}></Route>
 
         </Routes>
 
