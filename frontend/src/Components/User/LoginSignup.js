@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useState } from 'react'
+import React, { Fragment, useRef, useState ,useEffect} from 'react'
 import "./loginsignup.css"
 import Loading from "../layout/Loader/Loading"
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
@@ -6,9 +6,19 @@ import LockIcon from '@mui/icons-material/Lock';
 import Person2Icon from '@mui/icons-material/Person2';
 import { Link } from 'react-router-dom';
 import img from "../../images/Profile.png"
+import { useDispatch,useSelector } from 'react-redux';
+import {login,clearErrors} from "../../actions/userAction"
+import {useAlert} from "react-alert"
+import { useNavigate } from 'react-router-dom';
 
 
 const LoginSignup = () => {
+
+    const dispatch = useDispatch()
+    const alert = useAlert()
+    const navigate = useNavigate();
+
+    const {error,loading,isAuthenticated} = useSelector(state => state.user)
 
     const loginTab = useRef(null)
     const registerTab = useRef(null)
@@ -19,8 +29,9 @@ const LoginSignup = () => {
     const [loginPassword,setLoginPassword] = useState("")
 
 
-    const loginSubmit = () =>{
-        console.log("Form submitted")
+    const loginSubmit = (e) =>{
+        e.preventDefault()
+        dispatch(login(loginEmail,loginPassword))
     }
 
     const [user,setUser] = useState({
@@ -62,6 +73,18 @@ const LoginSignup = () => {
             setUser({...user,[e.target.name]:e.target.value})
         }
     }
+
+    useEffect(()=>{
+        if(error){
+            alert.error(error)
+            dispatch(clearErrors)
+        }
+        if(isAuthenticated){
+            navigate("/account")
+        }
+
+    },[dispatch,error,alert,navigate,isAuthenticated])
+
     const switchTabs = (e, tab) => {
         if (tab === "login") {
           switcherTab.current.classList.add("shiftToNeutral");
@@ -81,8 +104,10 @@ const LoginSignup = () => {
 
 
   return (
-    <Fragment>
-        <div className='LoginSignupContainer'>
+    <>
+       {loading ? <Loading></Loading>:
+       <Fragment>
+       <div className='LoginSignupContainer'>
             <div className='LoginSignupBox'>
             <div>
                 <div className='login_signup_toggle'>
@@ -170,7 +195,9 @@ const LoginSignup = () => {
             </form>
             </div>
         </div>
-    </Fragment>
+       </Fragment>
+       }
+    </>
   )
 }
 

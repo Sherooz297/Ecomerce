@@ -165,3 +165,52 @@
   .shiftToRight {
     transform: translateX(100%);
   }
+
+
+
+  @media screen and (max-width: 600px){
+    .LoginSignupContainer{
+      background: white;
+    }
+    .LoginSignupBox{
+      width: 100vw;
+      height: 95vh;
+    }
+    .login_signup_toggle{
+      height: 5vmax;
+    }
+    .login_signup_toggle >p{
+      font: 300 1.5vmax "Roboto"
+    }
+    .loginForm,.signupForm{
+      padding: 5vmax;
+    }
+    .loginForm>div>input,.signupForm>div>input{
+      padding: 2.5vmax;
+      font: 300 1.7vmax cursive;
+    }
+    .loginForm>div>svg,.signupForm>div>svg{
+      font-size: 2.8vmax;
+    }
+    .loginForm > a {
+      font: 500 1.8vmax "Gill Sans";
+    }
+  
+    #registerImage > img {
+      width: 8vmax;
+      border-radius: 100%;
+    }
+  
+    #registerImage > input::file-selector-button {
+      height: 7vh;
+      font: 400 1.8vmax cursive;
+    }
+  
+    .loginBtn,
+    .signUpBtn {
+      font: 300 1.9vmax "Roboto";
+      padding: 1.8vmax;
+    }
+  }
+    
+  
