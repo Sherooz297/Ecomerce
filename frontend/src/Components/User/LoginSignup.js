@@ -7,7 +7,7 @@ import Person2Icon from '@mui/icons-material/Person2';
 import { Link } from 'react-router-dom';
 import img from "../../images/Profile.png"
 import { useDispatch,useSelector } from 'react-redux';
-import {login,clearErrors} from "../../actions/userAction"
+import {login,clearErrors,register} from "../../actions/userAction"
 import {useAlert} from "react-alert"
 import { useNavigate } from 'react-router-dom';
 
@@ -54,7 +54,7 @@ const LoginSignup = () => {
             myForm.append("password", password);
             myForm.append("avatar", avatar);
 
-            console.log("signUp from submit")
+            dispatch(register(myForm))
     }
 
     const registerDataChange = (e) => {
@@ -168,8 +168,8 @@ const LoginSignup = () => {
              </div>
              <div className='signUpPassword'>
                     <LockIcon/>
-                    <input type="email"
-                     placeholder='Email'
+                    <input type="password"
+                     placeholder='password'
                      required
                      name='password'
                      value={password}

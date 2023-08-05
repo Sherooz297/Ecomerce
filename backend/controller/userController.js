@@ -4,16 +4,24 @@ const catchAsyncError = require('../middleware/catchAsyncError');
 const sendToken = require('../utils/jwttoken,');
 const sendEmail = require('../utils/sendEmail.js')
 const crypto = require("crypto")
+const cloudinary = require('cloudinary')
 
 //user regeistration
 
 exports.registeruser = catchAsyncError(async(req,res,next)=>{
+
+    const mycloud = await cloudinary.v2.uploader.upload(req.body.avatar,{
+        folder:"avatars",
+        width:150,
+        crop:"scale",
+    })
+
     const {name,email,password} = req.body;
     const user = await User.create({
         name,email,password,
         avatar:{
-            public_id:"this is a sample",
-            url:"url of pic"
+            public_id:mycloud.public_id,
+            url:mycloud.secure_url
         }
     })
 
