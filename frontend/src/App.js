@@ -9,19 +9,32 @@ import ProductCard from "./Components/Product/ProductCard.js";
 import ProductMenu from "./Components/Product/ProductMenu.js"
 import Search from "./Components/Product/Search.js"
 import LoginSignup from "./Components/User/LoginSignup";
+import UserOptions from "./Components/layout/Navbar/UserOptions"
+import store from "./Store"
+import { loadUser } from "./actions/userAction";
+import { useSelector } from "react-redux";
 
 function App() {
+
+const {isAuthenticated,user} = useSelector(state => state.user)
+
   useEffect(() => {
     webFont.load({
       google: {
         families: ["Roboto", "Droid sans"],
       },
     });
+
+    store.dispatch(loadUser())
+
   }, []);
   return (
     <>
       <BrowserRouter>
         <Navbar />
+
+        {isAuthenticated && <UserOptions user={user} /> }
+       
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/getsingleproduct/:id" element={<ProductCard/>}></Route>
