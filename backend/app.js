@@ -11,6 +11,7 @@ const core = require("cors")
 
 
 const app = express()
+app.use(express.static('build'))
 app.use(express.json())
 app.use(cookie())
 app.use(bodyParser.urlencoded({extended:true}))

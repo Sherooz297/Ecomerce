@@ -15,10 +15,10 @@ export const getProducts = (keyword="",currentPage=1,price=[0 , 25000],catogory,
   try {
     dispatch({ type: ALL_PRODUCT_REQUEST });
 
-    let link = `http://localhost:4000/api/v1/product?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&rating[gte]=${ratings}`
+    let link = `/api/v1/product?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&rating[gte]=${ratings}`
 
     if(catogory){
-     link = `http://localhost:4000/api/v1/product?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${catogory}&rating[gte]=${ratings}`
+     link = `/api/v1/product?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${catogory}&rating[gte]=${ratings}`
     }
 
     const { data } = await axios.get(link);
@@ -42,7 +42,7 @@ export const getProductDetails = (id) => async (dispatch) => {      //function n
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
 
-    const { data } = await axios.get(`http://localhost:4000/api/v1/getsingleproduct/${id}`);
+    const { data } = await axios.get(`/api/v1/getsingleproduct/${id}`);
     console.log(data)
 
     dispatch({
