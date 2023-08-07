@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import {SpeedDial , SpeedDialAction} from "@mui/material"
+import Backdrop from '@mui/material/Backdrop';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PersonIcon from '@mui/icons-material/Person';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
@@ -44,9 +45,11 @@ const UserOptions = ({user}) => {
 
   return (
     <>
+        <Backdrop open={open} style={{zIndex:"10"}}/>
         <SpeedDial
             className='speedDial'
             ariaLabel='SpeedDial tooltrip example'
+            style={{zIndex:"11"}}
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
             open={open}
@@ -59,7 +62,7 @@ const UserOptions = ({user}) => {
             {options.map((item) => (
            <SpeedDialAction key={item.name} icon={item.icon} tooltipTitle={item.name} onClick={item.func}></SpeedDialAction>
             ))}     
-        </SpeedDial>
+         </SpeedDial>
     </>
   )
 }

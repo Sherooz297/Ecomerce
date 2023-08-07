@@ -9,10 +9,13 @@ import ProductCard from "./Components/Product/ProductCard.js";
 import ProductMenu from "./Components/Product/ProductMenu.js"
 import Search from "./Components/Product/Search.js"
 import LoginSignup from "./Components/User/LoginSignup";
-import UserOptions from "./Components/layout/Navbar/UserOptions"
+import UserOptions from "./Components/layout/Navbar/UserOptions";
+import Profile from "./Components/User/Profile.js"
 import store from "./Store"
 import { loadUser } from "./actions/userAction";
 import { useSelector } from "react-redux";
+import ProtectedRoute from "./Components/Route/ProtectedRoute";
+
 
 function App() {
 
@@ -36,11 +39,20 @@ const {isAuthenticated,user} = useSelector(state => state.user)
         {isAuthenticated && <UserOptions user={user} /> }
        
         <Routes>
+
+          <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
+                <Route path="/account" element={<Profile />} />
+              </Route>
+
+
           <Route path="/" element={<Home />}></Route>
           <Route path="/getsingleproduct/:id" element={<ProductCard/>}></Route>
           <Route path="/ProductMenu" element={<ProductMenu/>}></Route>
           <Route path="/ProductMenu/:keyword" element={<ProductMenu/>}></Route>
           <Route path="/Search" element={<Search/>}></Route>
+
+
+ 
           <Route path="/login" element={<LoginSignup/>}></Route>
 
         </Routes>
