@@ -71,7 +71,8 @@ useEffect(()=>{
 
   return (
     <>
-       {loading ? <Loading/> :  <Fragment>
+       {loading ? <Loading/> : 
+        <Fragment>
             <div className='updateProfileContainer' >
                 <div className='updateProfileBox'>
 
