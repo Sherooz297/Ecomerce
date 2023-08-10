@@ -7,6 +7,7 @@ import ReactStar from "react-rating-stars-component"
 import Loading from '../layout/Loader/Loading';
 import { useAlert } from 'react-alert';
 import MetaData from '../layout/MetaData';
+import { addItemsToCart } from '../../actions/cartAction';
 
 const ProductCard = () => {
 
@@ -24,6 +25,11 @@ const ProductCard = () => {
         readOnly: true,
         precision: 0.5,
       };
+
+    const addToCartHandler = () =>{
+        dispatch(addItemsToCart(id,amount))
+        alert.success("item Added to Cart")
+    }
 
     useEffect(() => {
         if(error){
@@ -90,7 +96,7 @@ const ProductCard = () => {
                         <span className='py-4 px-6 rounded-lg'>{amount}</span>
                         <button className='bg-gray-200 py-2 px-4 rounded-lg text-violet-800 text-3xl' onClick={() => setAmount((prev) => prev + 1)}>+</button>
                     </div>
-                    <button className='bg-violet-800 text-white font-semibold py-3 px-16 rounded-xl h-full'>Add to Cart</button>
+                    <button className='bg-violet-800 text-white font-semibold py-3 px-16 rounded-xl h-full' onClick={addToCartHandler}>Add to Cart</button>
                 </div>
             </div>
         </div>
