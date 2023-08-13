@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./navbar.css";
 
-import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 
@@ -61,9 +61,11 @@ const Navbar = () => {
            <SearchIcon style={iconStyle}/>
            </NavLink>
             </li>
+            <NavLink to="/cart">
             <li>
-             <ProductionQuantityLimitsIcon style={iconStyle}/>
+             <ShoppingCartIcon style={iconStyle}/>
             </li>
+            </NavLink>
             <NavLink to="/login">
             <li>
             <AccountBoxIcon  style={iconStyle}/>
