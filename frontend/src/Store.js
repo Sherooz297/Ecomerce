@@ -17,8 +17,13 @@ const reducer = combineReducers({
 //here we are getting the items from the localstorage if the product is exixts
 let initialState = {
   cart:{
+    //getting the cart data from the local storage if it has
     cartItems : localStorage.getItem("cartItems")?
-    JSON.parse(localStorage.getItem("cartItems")):[]
+    JSON.parse(localStorage.getItem("cartItems")):[],
+
+//getting the shipping info data from the local storage if it has
+    shippingInfo:localStorage.getItem("shippingInfo")?
+    JSON.parse(localStorage.getItem("shippingInfo")):{}
   }
 };
 

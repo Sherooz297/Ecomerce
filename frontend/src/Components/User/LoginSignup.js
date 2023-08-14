@@ -9,7 +9,7 @@ import img from "../../images/Profile.png"
 import { useDispatch,useSelector } from 'react-redux';
 import {login,clearErrors,register} from "../../actions/userAction"
 import {useAlert} from "react-alert"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate ,useLocation} from 'react-router-dom';
 
 
 const LoginSignup = () => {
@@ -17,6 +17,7 @@ const LoginSignup = () => {
     const dispatch = useDispatch()
     const alert = useAlert()
     const navigate = useNavigate();
+    const location = useLocation()
 
     const {error,loading,isAuthenticated} = useSelector(state => state.user)
 
@@ -74,16 +75,18 @@ const LoginSignup = () => {
         }
     }
 
+    const redirect = location.search ? location.search.split("=")[1] :"/account"
+
     useEffect(()=>{
         if(error){
             alert.error(error)
             dispatch(clearErrors)
         }
         if(isAuthenticated){
-            navigate("/account")
+            navigate(redirect)
         }
 
-    },[dispatch,error,alert,navigate,isAuthenticated])
+    },[dispatch,error,alert,navigate,isAuthenticated,redirect])
 
     const switchTabs = (e, tab) => {
         if (tab === "login") {
