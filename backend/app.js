@@ -3,8 +3,15 @@ const product = require("./routes/productRoute")
 const user = require("./routes/userRoute")
 const bodyParser = require("body-parser")
 const fileUpload = require("express-fileupload")
+const dotenv = require('dotenv')
+
+dotenv.config({path:"backend/config/config.env"});
+
+
 
 const order = require("./routes/orderRoute")
+const payment = require("./routes/paymentRoute")
+
 const errorMiddleware = require('./middleware/error')
 const cookie = require('cookie-parser')
 const core = require("cors")
@@ -21,6 +28,8 @@ app.use(core())
 app.use("/api/v1",product)
 app.use("/api/v1",user)
 app.use("/api/v1",order)
+app.use("/api/v1",payment)
+
 
 
 
