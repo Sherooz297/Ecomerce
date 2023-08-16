@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import "./payment.css"
 import CheckoutSteps from './CheckoutSteps'
 import { useSelector,useDispatch } from 'react-redux'
@@ -11,6 +11,7 @@ import CreditCardIcon from '@mui/icons-material/CreditCard';
 import EventIcon from '@mui/icons-material/Event';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { useNavigate } from 'react-router-dom'
+import { createOrder,clearErrors } from '../../actions/orderAction'
 
 
 const Payment = () => {
@@ -25,10 +26,20 @@ const Payment = () => {
 
     const { shippingInfo, cartItems } = useSelector((state) => state.cart);
     const { user } = useSelector((state) => state.user);
+    const { error} = useSelector((state) => state.newOrder);
+
+
 
     const paymentData = {
         amount: Math.round(orderInfo.totalPrice * 100),
       };
+
+      const order = {
+        shippingInfo,orderItems:cartItems,
+        itemsPrice:orderInfo.subtotal,
+        taxPrice:orderInfo.shippingCharges,
+        totalPrice:orderInfo.totalPrice
+      }
 
       const submitHandler = async (e) => {
         e.preventDefault();
@@ -74,8 +85,16 @@ const Payment = () => {
             alert.error(result.error.message);
           } else {
             if (result.paymentIntent.status === "succeeded") {
-            
+              //creating the order
+
+              order.paymentInfo={
+                id:result.paymentIntent.id,
+                status:result.paymentIntent.status,
+              }
+              dispatch(createOrder(order))
               navigate("/success");
+
+              
             } else {
               alert.error("There's some issue while processing payment ");
             }
@@ -85,6 +104,13 @@ const Payment = () => {
           alert.error(error.response.data.message);
         }
       };
+
+      useEffect(()=>{
+          if(error){
+            alert.error(error);
+            dispatch(clearErrors())
+          }
+      },[dispatch,error,alert])
   return (
     <>
         <MetaData title="Payment"/>

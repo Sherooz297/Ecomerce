@@ -4,6 +4,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { productDetailReducer, productReducer } from "./reducers/productReducer";
 import { forgotPasswordRuducer, profileRuducer, userRuducer } from "./reducers/userReducer";
 import { cartReducer } from "./reducers/cartReducer";
+import { newOrderReducer } from "./reducers/orderReducer";
 
 const reducer = combineReducers({
   products: productReducer,
@@ -11,7 +12,9 @@ const reducer = combineReducers({
   user:userRuducer,
   profile:profileRuducer,
   forgotPassword:forgotPasswordRuducer,
-  cart:cartReducer
+  cart:cartReducer,
+  newOrder:newOrderReducer
+
 });
 
 //here we are getting the items from the localstorage if the product is exixts
