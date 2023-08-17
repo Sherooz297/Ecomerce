@@ -31,35 +31,28 @@ exports.getSingleOrder = catchAsyncError(async(req,res,next)=>{
         "user",
         "name email"
     );
-
-    if(!order){
-        return next(new ErrorHandling("order not found with this id",404))
-    }
+    if (!order) {
+        return next(new ErrorHandling("order not found",404));
+    };
 
     res.status(200).json({
         success:true,
         order
-    })
+    });
 })
 
 //get login user order
 
 
-exports.getLoginUserOrder = catchAsyncError(async(req,res,next)=>{
+exports.myOrder = catchAsyncError(async(req,res,next)=>{
+    
+    const orders = await Order.find({ user:req.user._id });
 
-    console.log('User ID:', req.user);
-
-    const orders = await Order.find({user: req.user._id})
-   
-
-    if(!orders){
-        return next(new ErrorHandling("order not found with this id",404))
-    }
 
     res.status(200).json({
         success:true,
-        orders,
-    })
+        orders
+    });
 })
 
 //get all orders admin only
