@@ -1,6 +1,6 @@
 const express = require('express')
 
-const {getallproduct, createproduct, updateproduct, deleteproduct, getsingleproduct, crateProductReview,getAllReveiws, deleteReview} = require("../controller/productController")
+const {getallproduct, createproduct, updateproduct, deleteproduct, getsingleproduct, crateProductReview,getAllReveiws, deleteReview, getAdminProducts} = require("../controller/productController")
 const { isAuthenticationUser, autherizedRole } = require('../middleware/auth')
 const router = express.Router()
 
@@ -12,6 +12,8 @@ router.route("/getsingleproduct/:id").get(getsingleproduct)
 router.route("/review").put(isAuthenticationUser, crateProductReview)
 router.route("/getAllReviews").get(getAllReveiws)
 router.route("/deleteReview").delete(isAuthenticationUser,autherizedRole("admin"),deleteReview)
+
+router.route("/admin/products").get(isAuthenticationUser , autherizedRole("admin"),getAdminProducts)
 
 
 module.exports = router

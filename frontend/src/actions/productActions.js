@@ -6,7 +6,11 @@ import {
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_SUCCESS,
   PRODUCT_DETAILS_FAIL,
+  ADMIN_PRODUCT_REQUEST,
+  ADMIN_PRODUCT_SUCCESS,
+  ADMIN_PRODUCT_FAIL,
   CLEAR_ERRORS,
+
 } from "../constants/productConstants";
 
 // Modify the action creator to use Redux Thunk correctly
@@ -36,6 +40,33 @@ export const getProducts = (keyword="",currentPage=1,price=[0 , 25000],catogory,
 };
 
 
+//get all products for admin
+
+export const getAdminProducts = () => async(dispatch) => {
+  try {
+    dispatch({
+      type:ADMIN_PRODUCT_REQUEST
+    })
+
+
+    const {data} = await axios.get("/api/v1/admin/products")
+
+    dispatch({
+      type:ADMIN_PRODUCT_SUCCESS,
+      payload:data.products
+    })
+    
+  } catch (error) {
+
+    dispatch({
+      type:ADMIN_PRODUCT_FAIL,
+      payload:error.response.data.message
+    })
+    
+  }
+}
+
+
 
 export const getProductDetails = (id) => async (dispatch) => {      //function name should be camel case to implement thunk
   try {
@@ -45,12 +76,12 @@ export const getProductDetails = (id) => async (dispatch) => {      //function n
     console.log(data)
 
     dispatch({
-      type: ALL_PRODUCT_SUCCESS,
+      type: PRODUCT_DETAILS_SUCCESS,
       payload: data.product,
     });
   } catch (error) {
     dispatch({
-      type: ALL_PRODUCT_FAIL,
+      type: PRODUCT_DETAILS_FAIL,
       payload: error.response.data.message,
     });
   }

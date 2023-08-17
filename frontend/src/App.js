@@ -29,6 +29,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import OrderSuccess from "./Components/cart/OrderSuccess.js"
 import MyOrders from "./Components/order/MyOrders.js"
 import Dashboard from "./Components/Admin/Dashboard.js"
+import ProductList from "./Components/Admin/ProductList.js"
 
 function App() {
 
@@ -85,6 +86,8 @@ async function getStripeApiKey(){
 
 
                 <Route isAdmin={true} path="/admin/dashboard" element={<Dashboard/>}/>
+                <Route isAdmin={true} path="/admin/products" element={<ProductList/>}/>
+
 
 
 

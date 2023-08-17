@@ -36,6 +36,18 @@ exports.getallproduct= catchAsyncError(async(req,res,next)=>{
    })
 });
 
+//getting all products (admin)
+
+exports.getAdminProducts = catchAsyncError(async(req,res,next)=>{
+  const products = await Product.find()
+
+  res.status(200).json({
+    success:true,
+    products
+  })
+
+})
+
  //   Updating the  product  ---admin  only---
   
  exports.updateproduct = catchAsyncError(async (req,res,next)=>{
