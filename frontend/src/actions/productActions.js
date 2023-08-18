@@ -9,6 +9,10 @@ import {
   ADMIN_PRODUCT_REQUEST,
   ADMIN_PRODUCT_SUCCESS,
   ADMIN_PRODUCT_FAIL,
+  NEW_PRODUCT_REQUEST,
+  NEW_PRODUCT_SUCCESS,
+  NEW_PRODUCT_FAIL,
+
   CLEAR_ERRORS,
 
 } from "../constants/productConstants";
@@ -67,7 +71,34 @@ export const getAdminProducts = () => async(dispatch) => {
 }
 
 
+//creatuing the new product
 
+export const createProduct = (productData) => async(dispatch) => {
+    try {
+      dispatch({type:NEW_PRODUCT_REQUEST})
+
+      const config = {
+
+        headers:{"Content-Type":"application/json"}
+      }
+
+      const {data} = await axios.post(`/api/v1/admin/createproduct`,productData,config)
+
+      dispatch({
+        type:NEW_PRODUCT_SUCCESS,
+        payload:data
+      })
+      
+    } catch (error) {
+      dispatch({
+        type:NEW_PRODUCT_FAIL,
+        payload:error.response.data.message
+      })
+    }
+}
+
+
+//getting the product details
 export const getProductDetails = (id) => async (dispatch) => {      //function name should be camel case to implement thunk
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
