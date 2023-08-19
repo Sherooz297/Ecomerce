@@ -57,7 +57,7 @@ const NewProduct = () => {
 
 
       const createProductSubmitHandler = (e) =>{
-        e.prevetDefault()
+        e.preventDefault()
         const myForm = new FormData();
 
         myForm.set("name", name);

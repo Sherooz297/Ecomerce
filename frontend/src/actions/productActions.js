@@ -79,7 +79,7 @@ export const createProduct = (productData) => async(dispatch) => {
 
       const config = {
 
-        headers:{"Content-Type":"application/json"}
+        Headers:{"Content-type":"application/json"}
       }
 
       const {data} = await axios.post(`/api/v1/admin/createproduct`,productData,config)

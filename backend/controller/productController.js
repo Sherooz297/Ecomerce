@@ -2,10 +2,37 @@ const Product = require('../Models/productModal')
 const ErrorHandling = require('../utils/ErrorHandler')
 const catchAsyncError = require('../middleware/catchAsyncError')
 const ApiFeatures = require("../utils/apifeatures")
+const cloudinary = require("cloudinary")
 
 //Creating the New product ---Admin Only--- 
 
 exports.createproduct = catchAsyncError(async(req,res,next)=>{
+
+  let images=[];
+
+  //agar image 1 he hy to wo string hoge os ko images array ma push kar dyna hy
+  if( typeof req.body.images === "string"){
+      images.push(req.body.images)
+
+      //agar zayada hoge to wo khud array hoge to osy images ka baradabar rahk adyna hay
+  }else{
+      images= req.body.images 
+  }
+
+  const imagesLinks = [];
+
+  for(let i = 0; i<images.length; i++){
+    const result = await cloudinary.v2.uploader.upload(images[i],{
+      folder:"products"
+    })
+
+    imagesLinks.push({
+      public_id:result.public_id,
+      url:result.secure_url
+    })
+  }
+  
+  req.body.images = imagesLinks;
 
   req.body.user = req.user.id;
   
