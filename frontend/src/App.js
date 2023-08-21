@@ -31,6 +31,7 @@ import MyOrders from "./Components/order/MyOrders.js"
 import Dashboard from "./Components/Admin/Dashboard.js"
 import ProductList from "./Components/Admin/ProductList.js"
 import NewProduct from "./Components/Admin/NewProduct";
+import UpdateProduct from "./Components/Admin/UpdateProduct.js"
 
 function App() {
 
@@ -89,6 +90,8 @@ async function getStripeApiKey(){
                 <Route isAdmin={true} path="/admin/dashboard" element={<Dashboard/>}/>
                 <Route isAdmin={true} path="/admin/products" element={<ProductList/>}/>
                 <Route isAdmin={true} path="/admin/product" element={<NewProduct/>}/>
+                <Route isAdmin={true} path="/admin/product/:id" element={<UpdateProduct/>}/>
+
 
 
 
