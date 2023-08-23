@@ -37,6 +37,10 @@ import UpdateOrder from "./Components/Admin/UpdateOrder.js"
 import UserList from "./Components/Admin/UserList.js"
 import UpdateUser from "./Components/Admin/UpdateUser.js"
 
+import Contact from "./Components/layout/Contect/Contect.js"
+import About from "./Components/layout/About/About.js"
+
+
 function App() {
 
 const {isAuthenticated,user} = useSelector(state => state.user)
@@ -100,16 +104,6 @@ async function getStripeApiKey(){
                 <Route isAdmin={true} path="/admin/order/:id" element={<UpdateOrder/>}/>
                 <Route isAdmin={true} path="/admin/users" element={<UserList/>}/>
                 <Route isAdmin={true} path="/admin/user/:id" element={<UpdateUser/>}/>
-
-
-
-
-
-
-
-
-
-                
               </Route>
 
           <Route path="/password/forgot" element={<ForgotPassword/>}/>
@@ -124,6 +118,10 @@ async function getStripeApiKey(){
           <Route path="/ProductMenu" element={<ProductMenu/>}></Route>
           <Route path="/ProductMenu/:keyword" element={<ProductMenu/>}></Route>
           <Route path="/Search" element={<Search/>}></Route>
+          <Route path="/Contect" element={<Contact/>}></Route>
+          <Route path="/About" element={<About/>}></Route>
+
+
 
 
  

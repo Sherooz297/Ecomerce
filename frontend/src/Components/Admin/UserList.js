@@ -95,7 +95,7 @@ const UsersList = () => {
 
             <Button
               onClick={() =>
-                deleteUserHandler(params.getValue(params.row.id))
+                deleteUserHandler(params.row.id)
               }
             >
               <DeleteIcon />
