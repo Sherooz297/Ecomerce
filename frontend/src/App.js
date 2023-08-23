@@ -36,6 +36,7 @@ import OrderList from "./Components/Admin/OrderList.js"
 import UpdateOrder from "./Components/Admin/UpdateOrder.js"
 import UserList from "./Components/Admin/UserList.js"
 import UpdateUser from "./Components/Admin/UpdateUser.js"
+import ProductReviews from "./Components/Admin/ProductReviews.js"
 
 import Contact from "./Components/layout/Contect/Contect.js"
 import About from "./Components/layout/About/About.js"
@@ -104,6 +105,8 @@ async function getStripeApiKey(){
                 <Route isAdmin={true} path="/admin/order/:id" element={<UpdateOrder/>}/>
                 <Route isAdmin={true} path="/admin/users" element={<UserList/>}/>
                 <Route isAdmin={true} path="/admin/user/:id" element={<UpdateUser/>}/>
+                <Route isAdmin={true} path="/admin/reviews" element={<ProductReviews/>}/>
+
               </Route>
 
           <Route path="/password/forgot" element={<ForgotPassword/>}/>
