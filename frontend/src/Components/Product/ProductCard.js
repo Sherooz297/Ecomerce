@@ -98,6 +98,9 @@ const ProductCard = () => {
                     </div>
                     <button className='bg-violet-800 text-white font-semibold py-3 px-16 rounded-xl h-full' onClick={addToCartHandler}>Add to Cart</button>
                 </div>
+
+                <button className='bg-violet-800 text-white font-semibold py-3 px-16 rounded-xl h-full '>Write a Review</button>
+
             </div>
         </div>
         
