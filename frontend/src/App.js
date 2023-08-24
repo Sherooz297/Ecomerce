@@ -40,6 +40,7 @@ import ProductReviews from "./Components/Admin/ProductReviews.js"
 
 import Contact from "./Components/layout/Contect/Contect.js"
 import About from "./Components/layout/About/About.js"
+import NotFound from "./Components/layout/Not Found/NotFound.js"
 
 
 function App() {
@@ -123,11 +124,6 @@ async function getStripeApiKey(){
           <Route path="/Search" element={<Search/>}></Route>
           <Route path="/Contect" element={<Contact/>}></Route>
           <Route path="/About" element={<About/>}></Route>
-
-
-
-
- 
           <Route path="/login" element={<LoginSignup/>}></Route>
 
         </Routes>
