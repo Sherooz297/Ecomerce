@@ -20,7 +20,7 @@ const UserOptions = ({user}) => {
     const [open,setOpen] = useState()
 
     const options = [
-        // {icon : <ListIcon/> , name:"Orders", func:orders},
+        {icon : <ListIcon/> , name:"Orders", func:orders},
         {icon : <PersonIcon/> , name:"Profile", func:account},
         {icon : <ShoppingCartIcon style={{color:cartItems.length>0 ? "tomato": "unset"}}/> , name:`Cart(${cartItems.length})`, func:cart},
         {icon : <ExitToAppIcon/> , name:"Logout", func:LogoutUser},
@@ -36,9 +36,9 @@ const UserOptions = ({user}) => {
     function dashboard(){
         navigate("/admin/dashboard")
     }
-    // function orders(){
-    //     navigate("/orders")
-    // }
+    function orders(){
+        navigate("/orders")
+    }
     function account(){
         navigate("/account")
     }

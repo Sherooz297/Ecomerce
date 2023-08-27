@@ -57,17 +57,18 @@ export const myOrderReducer = (state = { orders: [] }, action) => {
       return {
         loading: true,
       };
+
     case MY_ORDER_SUCCESS:
       return {
         loading: false,
         orders: action.payload,
       };
+
     case MY_ORDER_FAIL:
       return {
         loading: false,
         error: action.payload,
       };
-
     case CLEAR_ERRORS:
       return {
         ...state,

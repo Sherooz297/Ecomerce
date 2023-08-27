@@ -18,6 +18,7 @@ const reducer = combineReducers({
   newReview: newReviewReducer,
   createProduct: createProductReducer,
   deleteProduct:deleteProductReducer,
+  myOrders:myOrderReducer,
   allOrders:allOrdersReducer,
   order:OrderReducer,
   orderDetails:orderDetailsReducer,

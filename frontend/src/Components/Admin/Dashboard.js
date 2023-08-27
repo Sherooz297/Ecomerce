@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom'
 import {Doughnut, Line} from "react-chartjs-2"
 import { useSelector,useDispatch } from 'react-redux'
 import { getAdminProducts } from '../../actions/productActions'
+import { getAllOrders } from '../../actions/orderAction'
+import { getAllUsers } from '../../actions/userAction'
 
 
 const Dashboard = () => {
@@ -28,7 +30,9 @@ const Dashboard = () => {
 
     useEffect(()=>{
       dispatch(getAdminProducts())
-   },[dispatch,orders,users])
+      dispatch(getAllOrders())
+      dispatch(getAllUsers())
+   },[dispatch])
 
 
 
@@ -76,12 +80,12 @@ const Dashboard = () => {
 
                         <Link to="/admin/orders">
                             <p>Orders</p>
-                            <p>{orders.length}</p>
+                            <p>{orders && orders.length}</p>
                         </Link>
 
                         <Link to="/admin/users">
                             <p>Users</p>
-                            <p>{users.length}</p>
+                            <p>{users && users.length}</p>
                         </Link>
                     </div>
                 </div>

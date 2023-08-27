@@ -33,6 +33,7 @@ import ProductList from "./Components/Admin/ProductList.js"
 import NewProduct from "./Components/Admin/NewProduct";
 import UpdateProduct from "./Components/Admin/UpdateProduct.js"
 import OrderList from "./Components/Admin/OrderList.js"
+import OrderDetail from "./Components/order/OrderDetail.js"
 import UpdateOrder from "./Components/Admin/UpdateOrder.js"
 import UserList from "./Components/Admin/UserList.js"
 import UpdateUser from "./Components/Admin/UpdateUser.js"
@@ -95,21 +96,23 @@ async function getStripeApiKey(){
 
                 <Route path="/success" element={<OrderSuccess/>}/>
                 <Route path="/orders" element={<MyOrders/>}/>
+                <Route path="/order/:id" element={<OrderDetail/>}/>
 
-
-                <Route isAdmin={true} path="/admin/dashboard" element={<Dashboard/>}/>
-                <Route isAdmin={true} path="/admin/products" element={<ProductList/>}/>
-                <Route isAdmin={true} path="/admin/product" element={<NewProduct/>}/>
-                <Route isAdmin={true} path="/admin/product/:id" element={<UpdateProduct/>}/>
-
-                <Route isAdmin={true} path="/admin/orders" element={<OrderList/>}/>
-                <Route isAdmin={true} path="/admin/order/:id" element={<UpdateOrder/>}/>
-                <Route isAdmin={true} path="/admin/users" element={<UserList/>}/>
-                <Route isAdmin={true} path="/admin/user/:id" element={<UpdateUser/>}/>
-                <Route isAdmin={true} path="/admin/reviews" element={<ProductReviews/>}/>
 
               </Route>
+              <Route element={<ProtectedRoute isAdmin={true} isAuthenticated={isAuthenticated} />}>
+                <Route  path="/admin/dashboard" element={<Dashboard/>}/>
+                <Route path="/admin/products" element={<ProductList/>}/>
+                <Route path="/admin/product" element={<NewProduct/>}/>
+                <Route path="/admin/product/:id" element={<UpdateProduct/>}/>
 
+                <Route path="/admin/orders" element={<OrderList/>}/>
+                <Route path="/admin/order/:id" element={<UpdateOrder/>}/>
+                <Route path="/admin/users" element={<UserList/>}/>
+                <Route path="/admin/user/:id" element={<UpdateUser/>}/>
+                <Route path="/admin/reviews" element={<ProductReviews/>}/>
+
+              </Route>
           <Route path="/password/forgot" element={<ForgotPassword/>}/>
           <Route path="/password/reset/:token" element={<ResetPassword/>}/>
 

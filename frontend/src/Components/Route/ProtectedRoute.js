@@ -10,7 +10,7 @@ const ProtectedRouter = ({isAdmin,isAuthenticated}) => {
     if (isAuthenticated===false) {
         return <Navigate to={'/login'}/>
     }
-    if(isAuthenticated===false&&isAdmin===true && user.role !=="admin"){
+    if(isAuthenticated===false&&isAdmin===false && user.role !=="admin"){
         return <Navigate to={'/login'}/>
     }
   
